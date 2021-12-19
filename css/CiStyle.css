@@ -147,10 +147,6 @@ header{
     filter: none;
 }
 
-.aero-container .aero-desc h2{
-    font-size: 200%;
-}
-
 .aero-container .aero-desc p{
     display: none;
 }
@@ -191,10 +187,6 @@ header{
     margin-left: 1em;
 }
 
-.game-container .game-desc h2{
-    font-size: 200%;
-}
-
 .game-container .game-desc p{
     display: none;
 }
@@ -225,10 +217,6 @@ header{
 
 .sport-container:hover img{
     filter: none;
-}
-
-.sport-container .sport-desc h2{
-    font-size: 200%;
 }
 
 .sport-container .sport-desc p{
