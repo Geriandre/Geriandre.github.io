@@ -1,0 +1,282 @@
+@import url('https://fonts.googleapis.com/css2?family=Patua+One&family=Poppins:wght@400;700&display=swap');
+
+:root {
+    --gris: #e6e6e6;
+    --vert1:#7bbca8;
+    --vert2:#5c9a8c;
+    --vert3:#506562;
+}
+
+html,body{
+    background: linear-gradient(to bottom right,#e6e6e6, #868686);
+    font-family: 'poppins';
+    font-weight: normal;
+    margin: 0;
+    height: 100vh;
+}
+
+h2{
+    margin: 0;
+}
+
+header{
+    background-color: var(--vert2);
+    display: flex;
+    justify-content: space-between;
+    padding: .5em;
+}
+
+.acc{
+    margin-left: 3%;
+    margin-top: 0;
+    margin-bottom: 0;
+}
+
+.acc a{
+    color: black;
+    font-style: normal;
+    text-decoration: none;
+}
+
+.acc h2{
+    margin-top: 0;
+    margin-bottom: 0;
+}
+
+.acc a:hover{
+    color: var(--gris);
+}
+
+.nom{
+    position: relative;
+    margin-top: 0;
+    margin-bottom: 0;
+    display: none;
+}
+
+.nom h2{
+    margin-top: 0;
+    margin-bottom: 0;
+}
+
+.dropbtn{
+    border: none;
+    background-color: var(--vert2);
+    font-size: 15px;
+}
+
+.dropdown{
+    position: relative;
+    display: inline-block;
+}
+
+.dropdown-content{
+    display: none;
+    position: absolute;
+    right: -.5em;
+    top: -.5em;
+    min-width: 290px;
+    z-index: 1;
+    background-color: var(--vert2);
+    border-radius: 1em;
+    box-shadow: 3px 3px 3px var(--vert3);
+    padding-top: 2.5em;
+    padding-bottom: .5em;
+    padding-left: 1em;
+    transition-duration: .5s;
+}
+
+.dropdown-content img{
+    position: absolute;
+    width: 32px;
+    height: 32px;
+    left: .5em;
+    top: .5em;
+}
+
+.dropdown:hover .dropdown-content{
+    display: block;
+    
+}
+
+.dropdown:hover .dropbtn{
+    color: var(--gris);
+}
+
+.contact{
+    position: relative;
+    margin-right: 3%;
+}
+
+.contword{
+    position: relative;
+    font-size: 150%;
+    font-weight: bold;
+    z-index: 2;
+}
+
+.contword:hover{
+    color: var(--gris);
+    cursor: pointer;
+}
+
+.cv-container{
+    background-color: var(--vert1);
+    padding: 1.5em;
+    display: flex;
+    margin: 2em;
+    border-radius: 1em;
+    box-shadow: .2em .2em .2em var(--vert3);
+    text-decoration: none;
+    color: black;
+}
+
+.cv-container:hover{
+    box-shadow: .3em .3em .3em var(--vert3);
+    cursor: pointer;
+}
+
+.cv-container img{
+    width: 128px;
+    height: 128px;
+    margin-right: 1em;
+}
+
+.cv-container h2{
+    margin-top: 40%;
+    margin-left: 20px;
+}
+
+.cv-container p{
+    display: none;
+    margin-left: 20px;
+}
+
+.pp-container{
+    background-color: var(--vert3);
+    margin: 2em;
+    border-radius: 1em;
+    padding: 1.5em;
+    box-shadow: .2em .2em .2em #405552;
+    justify-content: right;
+    display: flex;
+    text-decoration: none;
+    color: black;
+}
+
+.pp-container:hover{
+    box-shadow: .3em .3em .3em #405552;
+    cursor: pointer;
+}
+
+.pp-container img{
+    width: 128px;
+    height: 128px;
+}
+
+.pp-container h2{
+    text-align: right;
+    margin-top: 12%;
+    margin-right: 30px;
+}
+
+.pp-container p{
+    display: none;
+    margin-right: 30px;
+}
+
+.ci-container{
+    background-color: var(--vert1);
+    margin: 2em;
+    padding: 1.5em;
+    border-radius: 1em;
+    box-shadow: .2em .2em .2em var(--vert3);
+    text-decoration: none;
+    color: black;
+    display: flex;
+}
+
+.ci-container:hover{
+    box-shadow: .3em .3em .3em var(--vert3);
+    cursor: pointer;
+}
+
+.ci-container img{
+    width: 128px;
+    height: 128px;
+}
+
+.ci-container h2{
+    margin-top: 10%;
+    margin-left: 20px;
+}
+
+.ci-container p{
+    display: none;
+    margin-left: 20px;
+}
+
+@media screen and (min-width: 600px){
+
+    .nom{
+        display: block;
+    }
+
+    .cv-container h2{
+        margin-top: .5em;
+        margin-left: 20px;
+    }
+
+    .cv-container p{
+        display: block;
+    }
+
+    .pp-container h2{
+        margin-top: .5em;
+        margin-right: 30px;
+        text-align: left;
+    }
+
+    .pp-container p{
+        display: block;
+    }
+
+    .ci-container h2{
+        margin-top: .5em;
+        margin-left: 20px;
+    }
+    
+
+    .ci-container p{
+        display: block;
+    }
+
+}
+
+@media screen and (min-width: 820px){
+
+    .cv-container{
+        justify-content: space-between;
+        text-align: right;
+        width: 750px;
+        margin: 2em auto;
+    }
+
+    .pp-container{
+        justify-content: space-between;
+        width: 750px;
+        margin: 2em auto;
+    }
+
+    .pp-container h2{
+        text-align: left;
+    }
+
+    .ci-container{
+        justify-content: space-between;
+        width: 750px;
+        margin: 2em auto;
+        text-align: right;
+    }
+
+}
