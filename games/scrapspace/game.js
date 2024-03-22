@@ -298,13 +298,14 @@ function resize() {
     let yDif = (prevHeight - height) / 2;
     if (Math.abs(xDif) > 0 || Math.abs(yDif) > 0) {
         let dif = new Vector(xDif, yDif);
-
-        scraps.forEach((scrap) => {
-            scrap.pos.sub(dif);
-        });
-        particles.forEach((particle) => {
-            particle.pos.sub(dif);
-        });
+        if (gameLaunched) {
+            scraps.forEach((scrap) => {
+                scrap.pos.sub(dif);
+            });
+            particles.forEach((particle) => {
+                particle.pos.sub(dif);
+            });
+        }
         gameCanva.width = width;
         gameCanva.height = height;
     }
