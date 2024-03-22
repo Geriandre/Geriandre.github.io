@@ -24,14 +24,30 @@ let restartCountDown = 300;
 let subtitles = [];
 let gameLaunched = false;
 let cinematicDone = false;
-let cinematicCount = -500;
+let cinematicCount = -200;
 let gameFrameCount = 0;
 let globalFrameCount = 0;
+let DeltaTime = 0;
 const InitializeText = "initialisation du mode [Conscience-OS] ..."
 
 
 // game loop
 function gameLoop() {
+    let current = Date.now();
+    
+    update();
+    
+    elapsed = current - debut;
+    while (elapsed < frameDuration) {
+        current = Date.now();
+        elapsed = current - debut;
+    }
+    debut = current;
+    
+    requestAnimationFrame(gameLoop);
+}
+
+function update() {
     resize();
 
     context.clearRect(0, 0, width, height);
@@ -79,7 +95,6 @@ function gameLoop() {
     } 
 
     globalFrameCount++;
-    requestAnimationFrame(gameLoop);
 }
 
 function blackScreen() {
@@ -350,5 +365,9 @@ window.addEventListener("mouseup", (event) => {
     if (!gameLaunched) return;
     if (event.button === 0) player.toggleLaser(false);
 });
+
+let fps = 240;
+let frameDuration = 1000 / fps;
+let debut = Date.now();
 
 gameLoop();
