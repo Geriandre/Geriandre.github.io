@@ -1,60 +1,38 @@
 <!DOCTYPE html>
 <html lang="fr">
-    <head>
-        <meta charset="UTF-8">
-        <title>Pierre DE BEAUMONT</title>
-        <link rel="icon" type="image/png" sizes="16x16" href="images/icon.png">
-        <link rel="stylesheet" href="css/IndexStyle.css"> 
-    </head>
-    <body>
-        <header>
-            <div class="acc">
-                <a href="index.html"><h2>Accueil</h2></a>
-            </div>
-
-            <div class="nom">
-                <h2>Pierre de Beaumont</h2>
-            </div>
-
-            <div class="contact">
-                <div class="dropdown">
-                    <span class="contword">Contacts</span>
-                    <div class="dropdown-content">
-                        <img src="images/wifiLogo.svg" alt="Logo wifi">
-                       <p>Mail : pierre.debeaumont@free.fr</p>
-                       <p>Tel : 07 82 19 33 29</p>
-                    </div>
-                </div>
-            </div>
-
-        </header>
-
-        <a href="cv.html" class="cv-container">
-            <img src="images/cv-icon.svg" alt="Illustration du CV">
-
-            <div class="cv-desc">
-                <h2>Mon CV</h2>
-                <p>Lien vers la page de prévisualisation et de téléchargement de mon CV</p>
-            </div>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Geriandre's Games</title>
+    <link rel="icon" type="image/png" sizes="16x16" href="/img/icon.png">
+    <link rel="stylesheet" href="/css/indexStyle.css"> 
+</head>
+<body>
+    <div id="navbar">
+        <a class="flex" href="/">
+            <img id="logo" src="/img/logo.png" alt="logo">
+            <p id="name">Geriandre's Games</p>
         </a>
-
-        <a href="pp.html" class="pp-container">
-            <div class="pp-desc">
-                <h2>Mon projet professionnel</h2>
-                <p>Lien vers la pages de présentation de mon projet professionnel</p>
-            </div>
-
-            <img src="images/pp-icon.svg" alt="Illustration du projet professionnel">
-        </a>
-
-        <a href="ci.html" class="ci-container">
-            <img src="images/ci-icon.svg" alt="Illustration de mes centres d'intêrets">
-
-            <div class="ci-desc">
-                <h2>Mes centres d'intêrets</h2>
-                <p>Lien vers la page de présentation de mes centres d'intêrets</p>
-            </div>
-        </a>
-
-    </body>
+    </div>
+    <div id="menu">
+        <div class="buttondiv" id="scrapSpaceButton">
+            <a class="button" href="/games/scrapspace">
+                <img class="gameImg" src="/img/scrapSpace.png" alt="scrapspace">
+                <p class="gameName">Scrap Space</p>
+            </a>
+        </div>
+        <div class="comingsoon">
+            <a class="button" href="#">
+                <img class="gameImg" src="/img/comingSoon.png" alt="scrapspace">
+                <p class="gameName">Prochainement</p>
+            </a>
+        </div>
+        <div class="comingsoon">
+            <a class="button" href="#">
+                <img class="gameImg" src="/img/comingSoon.png" alt="scrapspace">
+                <p class="gameName">Prochainement</p>
+            </a>
+        </div>
+    </div>
+</body>
 </html>
