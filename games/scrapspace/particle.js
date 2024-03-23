@@ -4,6 +4,7 @@ class Particle {
         this.spd = new Vector(sx, sy);
         this.size = size;
         this.lifetime = lifetime;
+        this.maxLifetime = lifetime;
         this.fillColor = fillColor;
         this.strokeColor = strokeColor;
     }
@@ -21,8 +22,11 @@ class Particle {
 
         ctx.translate(this.pos.x, this.pos.y);
         
-        ctx.fillRect(-this.size/2 * Math.min(this.lifetime/100, 1), -this.size/2 * Math.min(this.lifetime/100, 1), this.size * Math.min(this.lifetime/100, 1), this.size * Math.min(this.lifetime/100, 1));
-        ctx.strokeRect(-this.size/2 * Math.min(this.lifetime/100, 1), -this.size/2 * Math.min(this.lifetime/100, 1), this.size * Math.min(this.lifetime/100, 1), this.size * Math.min(this.lifetime/100, 1));
+        let x = -this.size/2 * Math.min(this.lifetime/this.maxLifetime, 1);
+        let y = -this.size/2 * Math.min(this.lifetime/this.maxLifetime, 1);
+        let w = this.size * Math.min(this.lifetime/this.maxLifetime, 1);
+        ctx.fillRect(x, y, w, w);
+        ctx.strokeRect(x, y, w, w);
 
         ctx.translate(-this.pos.x, -this.pos.y);
     }

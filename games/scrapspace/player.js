@@ -85,107 +85,109 @@ class Player {
         this.rightPanelHitboxC.y = this.rightPanelHitboxD.y + Math.sin(this.angle + 3.4) * 18;
 
         // cube collision
-        if (Vector.dist(cube.pos, this.pos) < collisionRadius*2) {
-            let cubeHitboxPoints = cube.getHitboxPoint();
-            //A-B
-            let currentPoint = cubeHitboxPoints[cubeHitboxPoints.length - 1];
-            cubeHitboxPoints.forEach((pt) => {
-                if(Vector.collide(this.hitboxA, this.hitboxB, currentPoint, pt)) {
-                    this.die();
-                }
-                currentPoint = pt;
-            });
-            //B-C
-            currentPoint = cubeHitboxPoints[cubeHitboxPoints.length - 1];
-            cubeHitboxPoints.forEach((pt) => {
-                if(Vector.collide(this.hitboxB, this.hitboxC, currentPoint, pt)) {
-                    this.die();
-                }
-                currentPoint = pt;
-            });
-            //C-D
-            currentPoint = cubeHitboxPoints[cubeHitboxPoints.length - 1];
-            cubeHitboxPoints.forEach((pt) => {
-                if(Vector.collide(this.hitboxC, this.hitboxD, currentPoint, pt)) {
-                    this.die();
-                }
-                currentPoint = pt;
-            });
-            //D-A
-            currentPoint = cubeHitboxPoints[cubeHitboxPoints.length - 1];
-            cubeHitboxPoints.forEach((pt) => {
-                if(Vector.collide(this.hitboxD, this.hitboxA, currentPoint, pt)) {
-                    this.die();
-                }
-                currentPoint = pt;
-            });
+        if (cube) {
+            if (Vector.dist(cube.pos, this.pos) < collisionRadius*2) {
+                let cubeHitboxPoints = cube.getHitboxPoint();
+                //A-B
+                let currentPoint = cubeHitboxPoints[cubeHitboxPoints.length - 1];
+                cubeHitboxPoints.forEach((pt) => {
+                    if(Vector.collide(this.hitboxA, this.hitboxB, currentPoint, pt)) {
+                        this.die();
+                    }
+                    currentPoint = pt;
+                });
+                //B-C
+                currentPoint = cubeHitboxPoints[cubeHitboxPoints.length - 1];
+                cubeHitboxPoints.forEach((pt) => {
+                    if(Vector.collide(this.hitboxB, this.hitboxC, currentPoint, pt)) {
+                        this.die();
+                    }
+                    currentPoint = pt;
+                });
+                //C-D
+                currentPoint = cubeHitboxPoints[cubeHitboxPoints.length - 1];
+                cubeHitboxPoints.forEach((pt) => {
+                    if(Vector.collide(this.hitboxC, this.hitboxD, currentPoint, pt)) {
+                        this.die();
+                    }
+                    currentPoint = pt;
+                });
+                //D-A
+                currentPoint = cubeHitboxPoints[cubeHitboxPoints.length - 1];
+                cubeHitboxPoints.forEach((pt) => {
+                    if(Vector.collide(this.hitboxD, this.hitboxA, currentPoint, pt)) {
+                        this.die();
+                    }
+                    currentPoint = pt;
+                });
 
-            //panels
-            //PanelLeft A-B
-            currentPoint = cubeHitboxPoints[cubeHitboxPoints.length - 1];
-            cubeHitboxPoints.forEach((pt) => {
-                if(Vector.collide(this.leftPanelHitboxA, this.leftPanelHitboxB, currentPoint, pt)) {
-                    this.panelCollide("left");
-                }
-                currentPoint = pt;
-            });
-            //PanelLeft B-C
-            currentPoint = cubeHitboxPoints[cubeHitboxPoints.length - 1];
-            cubeHitboxPoints.forEach((pt) => {
-                if(Vector.collide(this.leftPanelHitboxB, this.leftPanelHitboxC, currentPoint, pt)) {
-                    this.panelCollide("left");
-                }
-                currentPoint = pt;
-            });
-            //PanelLeft C-D
-            currentPoint = cubeHitboxPoints[cubeHitboxPoints.length - 1];
-            cubeHitboxPoints.forEach((pt) => {
-                if(Vector.collide(this.leftPanelHitboxC, this.leftPanelHitboxD, currentPoint, pt)) {
-                    this.panelCollide("left");
-                }
-                currentPoint = pt;
-            });
-            //PanelRight D-A
-            currentPoint = cubeHitboxPoints[cubeHitboxPoints.length - 1];
-            cubeHitboxPoints.forEach((pt) => {
-                if(Vector.collide(this.rightPanelHitboxD, this.rightPanelHitboxA, currentPoint, pt)) {
-                    this.panelCollide("right");
-                }
-                currentPoint = pt;
-            });
+                //panels
+                //PanelLeft A-B
+                currentPoint = cubeHitboxPoints[cubeHitboxPoints.length - 1];
+                cubeHitboxPoints.forEach((pt) => {
+                    if(Vector.collide(this.leftPanelHitboxA, this.leftPanelHitboxB, currentPoint, pt)) {
+                        this.panelCollide("left");
+                    }
+                    currentPoint = pt;
+                });
+                //PanelLeft B-C
+                currentPoint = cubeHitboxPoints[cubeHitboxPoints.length - 1];
+                cubeHitboxPoints.forEach((pt) => {
+                    if(Vector.collide(this.leftPanelHitboxB, this.leftPanelHitboxC, currentPoint, pt)) {
+                        this.panelCollide("left");
+                    }
+                    currentPoint = pt;
+                });
+                //PanelLeft C-D
+                currentPoint = cubeHitboxPoints[cubeHitboxPoints.length - 1];
+                cubeHitboxPoints.forEach((pt) => {
+                    if(Vector.collide(this.leftPanelHitboxC, this.leftPanelHitboxD, currentPoint, pt)) {
+                        this.panelCollide("left");
+                    }
+                    currentPoint = pt;
+                });
+                //PanelRight D-A
+                currentPoint = cubeHitboxPoints[cubeHitboxPoints.length - 1];
+                cubeHitboxPoints.forEach((pt) => {
+                    if(Vector.collide(this.rightPanelHitboxD, this.rightPanelHitboxA, currentPoint, pt)) {
+                        this.panelCollide("right");
+                    }
+                    currentPoint = pt;
+                });
 
-            //PanelRight A-B
-            currentPoint = cubeHitboxPoints[cubeHitboxPoints.length - 1];
-            cubeHitboxPoints.forEach((pt) => {
-                if(Vector.collide(this.rightPanelHitboxA, this.rightPanelHitboxB, currentPoint, pt)) {
-                    this.panelCollide("right");
-                }
-                currentPoint = pt;
-            });
-            //PanelRight B-C
-            currentPoint = cubeHitboxPoints[cubeHitboxPoints.length - 1];
-            cubeHitboxPoints.forEach((pt) => {
-                if(Vector.collide(this.rightPanelHitboxB, this.rightPanelHitboxC, currentPoint, pt)) {
-                    this.panelCollide("right");
-                }
-                currentPoint = pt;
-            });
-            //PanelRight C-D
-            currentPoint = cubeHitboxPoints[cubeHitboxPoints.length - 1];
-            cubeHitboxPoints.forEach((pt) => {
-                if(Vector.collide(this.rightPanelHitboxC, this.rightPanelHitboxD, currentPoint, pt)) {
-                    this.panelCollide("right");
-                }
-                currentPoint = pt;
-            });
-            //PanelRight D-A
-            currentPoint = cubeHitboxPoints[cubeHitboxPoints.length - 1];
-            cubeHitboxPoints.forEach((pt) => {
-                if(Vector.collide(this.rightPanelHitboxD, this.rightPanelHitboxA, currentPoint, pt)) {
-                    this.panelCollide("right");
-                }
-                currentPoint = pt;
-            });
+                //PanelRight A-B
+                currentPoint = cubeHitboxPoints[cubeHitboxPoints.length - 1];
+                cubeHitboxPoints.forEach((pt) => {
+                    if(Vector.collide(this.rightPanelHitboxA, this.rightPanelHitboxB, currentPoint, pt)) {
+                        this.panelCollide("right");
+                    }
+                    currentPoint = pt;
+                });
+                //PanelRight B-C
+                currentPoint = cubeHitboxPoints[cubeHitboxPoints.length - 1];
+                cubeHitboxPoints.forEach((pt) => {
+                    if(Vector.collide(this.rightPanelHitboxB, this.rightPanelHitboxC, currentPoint, pt)) {
+                        this.panelCollide("right");
+                    }
+                    currentPoint = pt;
+                });
+                //PanelRight C-D
+                currentPoint = cubeHitboxPoints[cubeHitboxPoints.length - 1];
+                cubeHitboxPoints.forEach((pt) => {
+                    if(Vector.collide(this.rightPanelHitboxC, this.rightPanelHitboxD, currentPoint, pt)) {
+                        this.panelCollide("right");
+                    }
+                    currentPoint = pt;
+                });
+                //PanelRight D-A
+                currentPoint = cubeHitboxPoints[cubeHitboxPoints.length - 1];
+                cubeHitboxPoints.forEach((pt) => {
+                    if(Vector.collide(this.rightPanelHitboxD, this.rightPanelHitboxA, currentPoint, pt)) {
+                        this.panelCollide("right");
+                    }
+                    currentPoint = pt;
+                });
+            }
         }
 
         // ray collision
@@ -686,6 +688,20 @@ class Player {
         
         ctx.strokeStyle = "#000000"
         ctx.rotate(-this.angle);
+
+        if (this.spd.mag() > 0.1) {
+            ctx.strokeStyle = "#ffffff80";
+            ctx.lineWidth = 3;
+            let dir = this.spd.heading() - Math.PI/2;
+            ctx.rotate(dir);
+            ctx.beginPath();
+            ctx.moveTo(-5, 50);
+            ctx.lineTo(0, 60);
+            ctx.lineTo(5, 50);
+            ctx.stroke();
+            ctx.rotate(-dir);
+        }
+
         ctx.translate(-width/2, -height/2);
 
         // hud

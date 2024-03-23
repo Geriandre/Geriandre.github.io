@@ -18,6 +18,7 @@ const cubeHealth = 20000;
 let player;
 let cube;
 let scrapCount;
+let distanceTravelled;
 let mouseX;
 let mouseY;
 let restartCountDown = 300;
@@ -28,6 +29,7 @@ let cinematicCount = -200;
 let gameFrameCount = 0;
 let globalFrameCount = 0;
 let DeltaTime = 0;
+let readyToSkipCine = false;
 const InitializeText = "initialisation du mode [Conscience-OS] ..."
 
 
@@ -64,8 +66,10 @@ function update() {
             updateRays();
             
             //cube update and draw
-            cube.update();
-            cube.draw(context);
+            if (cube) {
+                cube.update();
+                cube.draw(context);
+            }
             
             updateparticles();
             //player update and draw
@@ -73,6 +77,7 @@ function update() {
             player.setTarget(new Vector(mouseX, mouseY));
             player.draw(context);
             miningCheck();
+            distanceTravelled += player.spd.mag();
         
             restartInterface();
             if (gameFrameCount > 10 && gameFrameCount < 80) {
@@ -103,6 +108,7 @@ function blackScreen() {
 }
 
 function launchGame() {
+    readyToSkipCine = false;
     gameLaunched = true;
     generateSubtitles();
     start();
@@ -123,6 +129,11 @@ function cinematic() {
         context.font = "20px consolas";
         let str = InitializeText.slice(0, Math.min((cinematicCount - 17000) / 4, InitializeText.length))
         context.fillText(str, 10, 25);
+    } else if (readyToSkipCine) {
+        context.fillStyle = "rgba(255, 255, 255, " + (Math.sin(globalFrameCount/100) * 0.5 + 0.5) + ")";
+        context.font = "14px poppins";
+        let str = "Espace pour passer";
+        context.fillText(str, width - 150, height - 20);
     }
     if (cinematicCount > 17000 + InitializeText.length * 4) {
         let percent = "" + ~~Math.min((((cinematicCount - (17000 + InitializeText.length)) / 1000) * 100), 100) + "%";
@@ -144,9 +155,13 @@ function restartInterface() {
     }
     context.font = "20px consolas";
     context.fillStyle = "#00ff00";
-    let str = "~ détruit ~ (Scrap collecté(s) -- " + scrapCount + ") ~ espace pour réessayer ~"
-    str = str.slice(0, Math.min((300 - restartCountDown) / 4, str.length));
-    context.fillText(str, 10, 25);
+    let str = "~ détruit ~ \n\ndébris collecté(s) -- " + scrapCount + "\ndistance parcourue -- " + ~~(distanceTravelled/20) + "m\n\n~ espace pour réessayer ~"
+    str = str.slice(0, Math.min((300 - restartCountDown) / 3, str.length));
+    lines = str.split("\n");
+    let lineheight = 20;
+    for (let i = 0; i < lines.length; i++) {
+        context.fillText(lines[i], 10, 25 + (i*lineheight));
+    }
 }
 
 // start or restart
@@ -160,6 +175,7 @@ function start() {
     player = new Player();
     cube = new Cube(player.pos.x + width, player.pos.y);
     scrapCount = 0;
+    distanceTravelled = 0;
     generateStars();
     generateScraps();
 }
@@ -212,15 +228,24 @@ function updateRays() {
 // mining check
 function miningCheck() {
     if (!player.laserOn) return;
-        if (Vector.dist(player.target, cube.pos) < cubeSize/2) {
-            if (Math.random() > 0.98) particles.push(new Particle(player.target.x, player.target.y, Math.random() * 0.5 - 0.25, Math.random() * 0.5 - 0.25, 10, 300, "#3c3c3c", "#000000"));
-            if (Math.random() > 0.98) particles.push(new Particle(player.target.x, player.target.y, Math.random() * 0.5 - 0.25, Math.random() * 0.5 - 0.25, 10, 300, "#d63031", "#000000"));
-            cube.hp--;
-            if (cube.hp <= 0) {
-                scrapCount += cubeHealth;
-                player.fuel += 100;
-                for (let i = 0; i < 10; i++) {
-                    particles.push(new Particle(cube.pos.x, cube.pos.y, Math.random() * 0.5 - 0.25, Math.random() * 0.5 - 0.25, 10, 300, "#3c3c3c", "#000000"));
+        if (cube) {
+            if (Vector.dist(player.target, cube.pos) < cubeSize/2) {
+                if (Math.random() > 0.98) particles.push(new Particle(player.target.x, player.target.y, Math.random() * 0.5 - 0.25, Math.random() * 0.5 - 0.25, 10, 300, "#3c3c3c", "#000000"));
+                if (Math.random() > 0.98) particles.push(new Particle(player.target.x, player.target.y, Math.random() * 0.5 - 0.25, Math.random() * 0.5 - 0.25, 10, 300, "#d63031", "#000000"));
+                cube.hp--;
+                if (cube.hp <= 0) {
+                    scrapCount += cubeHealth;
+                    player.fuel += 100;
+                    for (let i = 0; i < 30; i++) {
+                        particles.push(new Particle(cube.pos.x, cube.pos.y, Math.random() * 0.5 - 0.25, Math.random() * 0.5 - 0.25, 10, 500, "#3c3c3c", "#000000"));
+                    }
+                    for (let i = 0; i < 30; i++) {
+                        particles.push(new Particle(cube.pos.x, cube.pos.y, Math.random() * 0.5 - 0.25, Math.random() * 0.5 - 0.25, 10, 500, "#d63031", "#000000"));
+                    }
+                    cube = null;
+                    rays.forEach((ray) => {
+                        ray.connected = false;
+                    })
                 }
             }
         }
@@ -345,10 +370,16 @@ window.addEventListener("keydown", (event) => {
             launchGame();
             return;
         }
-        player.togglePanels();
+        if (cinematicCount < 18500 && readyToSkipCine) {
+            cinematicCount = 18501;
+        } 
+        if (gameFrameCount > 100) {
+            player.togglePanels();
+        }
         if (restartCountDown < 300) start();
     }
     if (event.code === "KeyW") player.thrusterOn = true;
+    readyToSkipCine = true;
 });
 
 window.addEventListener("keyup", (event) => {
@@ -357,6 +388,7 @@ window.addEventListener("keyup", (event) => {
 });
 
 window.addEventListener("mousedown", (event) => {
+    readyToSkipCine = true;
     if (!gameLaunched) return;
     if (event.button === 0) player.toggleLaser(true);
 });
